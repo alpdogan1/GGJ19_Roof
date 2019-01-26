@@ -56,4 +56,62 @@ public static class SideUtilities
         Debug.LogError("Can't get side!");
         return Side.None;
     }
+
+    public enum SideRotationAxis
+    {
+        x, z
+    }
+
+    public static Side Rotate(this Side side, Side rotationSide)
+    {
+        var axis = (rotationSide == Side.East || rotationSide == Side.West) ? SideRotationAxis.z : SideRotationAxis.x;
+        var direction = rotationSide == Side.West || rotationSide == Side.North ? 1 : -1;
+
+        return side.Rotate(axis, direction);
+    }
+    
+    
+    public static Side Rotate(this Side side, SideRotationAxis axis, int direction)
+    {
+        if (axis == SideRotationAxis.x)
+        {
+            switch (side)
+            {
+                case Side.North:
+                    return direction > 0 ? Side.Bottom : Side.Top;
+                case Side.East:
+                    return Side.East;
+                case Side.South:
+                    return direction > 0 ? Side.Top : Side.Bottom;
+                case Side.West:
+                    return Side.West;
+                case Side.Top:
+                    return direction > 0 ? Side.North : Side.South;
+                case Side.Bottom:
+                    return direction > 0 ? Side.South : Side.North;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(side), side, null);
+            }
+        }
+        else
+        {
+            switch (side)
+            {
+                case Side.North:
+                    return Side.North;
+                case Side.East:
+                    return direction > 0 ? Side.Top : Side.Bottom;
+                case Side.South:
+                    return Side.South;
+                case Side.West:
+                    return direction > 0 ? Side.Bottom : Side.Top;
+                case Side.Top:
+                    return direction > 0 ? Side.East : Side.West;
+                case Side.Bottom:
+                    return direction > 0 ? Side.West : Side.East;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(side), side, null);
+            }
+        }
+    }
 }
