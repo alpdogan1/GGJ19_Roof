@@ -41,12 +41,16 @@ public class Player : MonoBehaviour
         
         // Rotate
         var lastRotation = 0f;
-        LeanTween.value(gameObject, 0, 90 * rotationDirectionMultiplier, 1).setOnUpdate((float f) =>
+        LeanTween.value(gameObject, 0, 90 * rotationDirectionMultiplier, MainVariables.Instance.PlayerRotationDuration)
+            .setEase(MainVariables.Instance.PlayerRotationEasing)
+            .setOnUpdate((float f) =>
         {
             var rotation = f - lastRotation;
             transform.RotateAround(farPoint, axis, rotation);
             lastRotation = f;
-        }).setOnStart(() => { _isMoving = true; }).setOnComplete(() => { _isMoving = false; });
+        })
+            .setOnStart(() => { _isMoving = true; })
+            .setOnComplete(() => { _isMoving = false; });
     }
 
     private bool CanMove(Side side)
