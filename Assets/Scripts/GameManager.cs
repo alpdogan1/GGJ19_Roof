@@ -48,4 +48,11 @@ public class GameManager : Singleton<GameManager>
         fpsPlayer.SetActive(isActivated);
         CameraFollow.Instance.mainCamera.enabled = !isActivated;
     }
+
+    public void OnLevelFinished(Piece finishPiece)
+    {
+        fpsPlayer.transform.position = finishPiece.TriggerFpsPosition.position;
+//switch camera to player
+
+    }
 }
