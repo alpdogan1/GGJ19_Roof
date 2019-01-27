@@ -77,7 +77,7 @@ public class CameraFollow : Singleton<CameraFollow>
                 mainCamera.fieldOfView = val;
             }).setOnComplete(() =>
             {
-                OnReplaced(true);
+                OnReplaced(startFollowingAfterReplaced);
             });
         }
     }

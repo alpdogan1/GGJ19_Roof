@@ -574,7 +574,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209769162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ce0f887090ea4230897771373b2601c, type: 3}
   m_Name: 
@@ -6229,6 +6229,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invalidRoofSides: 06000000
+--- !u!1 &702205966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 702205968}
+  - component: {fileID: 702205967}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &702205967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702205966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14719acf1b3e46bc9cfa3b59ab7bd87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  fpsPlayer: {fileID: 934761746}
+  homePlayer: {fileID: 209769167}
+--- !u!4 &702205968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702205966}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &934761746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1603256657604517799, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
+    type: 3}
+  m_PrefabInstance: {fileID: 1603256659245850940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &984155499
 GameObject:
   m_ObjectHideFlags: 0
@@ -7743,6 +7803,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 1603256657604517799, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1603256657604477831, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7751,7 +7816,7 @@ PrefabInstance:
     - target: {fileID: 1603256657604477831, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 2.67
       objectReference: {fileID: 0}
     - target: {fileID: 1603256657604477831, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
         type: 3}
