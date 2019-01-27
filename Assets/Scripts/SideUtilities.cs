@@ -1,9 +1,12 @@
 using System;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public static class SideUtilities
-{  
+{
+    private static Side[] _twoDSides = new[] {Side.North, Side.East, Side.South, Side.West};
+    
     [Button]
     public static bool IsPerpendicular2D(this Side side, Side otherSide)
     {
@@ -64,6 +67,11 @@ public static class SideUtilities
 
     public static Side Rotate(this Side side, Side rotationSide)
     {
+        if (!_twoDSides.Contains(rotationSide))
+        {
+            Debug.LogError("Can't use top or bottom as a rotation side");
+            return Side.None;
+        }
         var axis = (rotationSide == Side.East || rotationSide == Side.West) ? SideRotationAxis.z : SideRotationAxis.x;
         var direction = rotationSide == Side.West || rotationSide == Side.North ? 1 : -1;
 
