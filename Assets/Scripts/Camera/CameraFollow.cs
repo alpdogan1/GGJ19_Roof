@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CameraFollow : Singleton<CameraFollow>
@@ -27,6 +28,10 @@ public class CameraFollow : Singleton<CameraFollow>
     public Vector3 defaultRotation;
     [SerializeField]
     private float defaultFoV;
+
+    [SerializeField] private float gameEndDuration;
+    [SerializeField] private LeanTweenType gameEndEasing;
+    [SerializeField] private GameObject endGamePosRef;
 
     void LateUpdate()
     {
@@ -79,4 +84,11 @@ public class CameraFollow : Singleton<CameraFollow>
         }
     }
 
+    [Button]
+    public void GameEnd()
+    {
+        TriggerFollow(false);
+        LeanTween.move(mainCamera.gameObject, endGamePosRef.transform.position, gameEndDuration).setEase(gameEndEasing);
+        LeanTween.rotate(mainCamera.gameObject, endGamePosRef.transform.rotation.eulerAngles, gameEndDuration / 3).setEase(gameEndEasing);
+    }
 }

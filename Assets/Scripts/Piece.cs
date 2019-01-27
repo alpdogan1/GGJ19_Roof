@@ -11,6 +11,7 @@ public class Piece : MonoBehaviour
     [SerializeField] private UnityEvent _didTrigger;
     [SerializeField] private Transform _triggerFpsPosition;
     [SerializeField] private Transform _nextHomeTransformReference;
+    [SerializeField] public bool IsFinalTile;
 
     public bool IsTrigger => _isTrigger;
 

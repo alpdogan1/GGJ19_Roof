@@ -1,4 +1,5 @@
 ﻿using System;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -76,9 +77,12 @@ public class Player : MonoBehaviour
                 {
                     nextPiece.Trigger();
                     OnDidTriggerPiece(nextPiece);
+                    MasterAudio.PlaySoundAndForget(SoundManager.Instance.LevelEnd);
                 }
 
                 _isMoving = false;
+
+                MasterAudio.PlaySoundAndForget(SoundManager.Instance.Move);
             });
     }
 

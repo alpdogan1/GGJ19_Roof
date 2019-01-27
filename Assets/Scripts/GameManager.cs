@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -14,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject FpsPlayer => fpsPlayer;
 
     [SerializeField] private bool isFpsActive;
-
+    
     void Start()
     {
 //        SwitchPlayer();
@@ -22,6 +23,8 @@ public class GameManager : Singleton<GameManager>
 
         HomePlayer.DidTriggerPiece += PlayerOnDidTriggerPiece;
         _homeEnterDetector.DidEnterHome += PlayerDidEnterHome;
+        
+        MasterAudio.PlaySound(SoundManager.Instance.Music1);
     }
     void Update()
     {
@@ -42,6 +45,9 @@ public class GameManager : Singleton<GameManager>
             StartCoroutine(FpsSetActiveRoutine(true, 1f));
             CameraFollow.Instance.ReplaceCamera(FpsPlayer.transform.position, FpsPlayer.transform.localEulerAngles, 57, 1f, false);
 
+            MasterAudio.StopAllOfSound(SoundManager.Instance.Music2);
+            MasterAudio.PlaySound(SoundManager.Instance.Music1);
+            
         }
         else
         {
@@ -52,6 +58,10 @@ public class GameManager : Singleton<GameManager>
             CameraFollow.Instance.mainCamera.transform.rotation = fpsPlayer.transform.rotation;
             
             CameraFollow.Instance.ReplaceCamera(CameraFollow.Instance.TargetPosition, CameraFollow.Instance.defaultRotation, 30, 1f, true);
+            
+            MasterAudio.StopAllOfSound(SoundManager.Instance.Music1);
+            MasterAudio.PlaySound(SoundManager.Instance.Music2);
+
         }
     }
 
@@ -74,6 +84,8 @@ public class GameManager : Singleton<GameManager>
     {
         if(isFpsActive) return;
 
+        if(piece.IsFinalTile) return;;
+        
         FpsPlayer.transform.position = piece.TriggerFpsPosition.position;
         FpsPlayer.transform.rotation = piece.TriggerFpsPosition.rotation;
         FpsPlayer.GetComponent<FirstPersonController>().ReInitMouseLook();
