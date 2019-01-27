@@ -75,7 +75,10 @@ public class CameraFollow : Singleton<CameraFollow>
             LeanTween.value(mainCamera.fieldOfView, fieldOfView, duration).setOnUpdate((float val) =>
             {
                 mainCamera.fieldOfView = val;
-            }).setOnComplete(OnReplaced());
+            }).setOnComplete(() =>
+            {
+                OnReplaced(true);
+            });
         }
     }
     private void OnReplaced(bool startFollowingAfterReplaced)
