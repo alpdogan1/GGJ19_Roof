@@ -7,14 +7,23 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _roof;
 
     [ShowInInspector, ReadOnly] private bool _isMoving;
+    [ShowInInspector] private bool _isEnabled;
+
+    public event Action<Piece> DidTriggerPiece; 
     
     private Vector3 Position => transform.position + Vector3.down * MainVariables.Instance.GridWidth / 2;
 
     private Side RoofSide => transform.GetSideOf(_roof.transform, MainVariables.Instance.GridWidth / 4);
 
+    public bool IsEnabled
+    {
+        get { return _isEnabled; }
+        set { _isEnabled = value; }
+    }
+
     private void Start()
     {
-        InputManager.Instance.KeyPress += OnKeyPress;
+        HomeInputManager.Instance.KeyPress += OnKeyPress;
     }
 
     private void OnKeyPress(Side side)
@@ -33,6 +42,8 @@ public class Player : MonoBehaviour
         
         if (!CanMove(side)) return;
         
+        var nextPiece = GetPieceBySide(side);
+        
         var offset2D = side.ToVector();
         var farPoint = Position + (MainVariables.Instance.GridWidth / 2 * offset2D);
 
@@ -50,7 +61,15 @@ public class Player : MonoBehaviour
             lastRotation = f;
         })
             .setOnStart(() => { _isMoving = true; })
-            .setOnComplete(() => { _isMoving = false; });
+            .setOnComplete(() =>
+            {
+                if (nextPiece.IsTrigger)
+                {
+                    nextPiece.Trigger();
+                    OnDidTriggerPiece(nextPiece);
+                }
+                _isMoving = false;
+            });
     }
 
     private bool CanMove(Side side)
@@ -115,4 +134,8 @@ public class Player : MonoBehaviour
         print(RoofSide);
     }
     #endif
+    protected virtual void OnDidTriggerPiece(Piece piece)
+    {
+        DidTriggerPiece?.Invoke(piece);
+    }
 }
