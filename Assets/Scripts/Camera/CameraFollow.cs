@@ -11,7 +11,7 @@ public class CameraFollow : Singleton<CameraFollow>
     public Transform followTarget;
     public Vector3 followOffset;
 
-    private Vector3 TargetPosition
+    public Vector3 TargetPosition
     {
         get
         {
@@ -24,21 +24,10 @@ public class CameraFollow : Singleton<CameraFollow>
     private bool isFollowing;
     private bool isReplacing;
 
-    [SerializeField]
-    private Vector3 defaultRotation;
+    public Vector3 defaultRotation;
     [SerializeField]
     private float defaultFoV;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ReplaceCamera(TargetPosition, defaultRotation, defaultFoV, 1f, true);
-
-        }
-
-
-    }
     void LateUpdate()
     {
         if (isFollowing)
@@ -63,15 +52,15 @@ public class CameraFollow : Singleton<CameraFollow>
         }
 
     }
-    public void ReplaceCamera(Vector3 position, Vector3 localEulerRotation, float fieldOfView, float duration, bool startFollowingAfterReplaced = false)
+    public void ReplaceCamera(Vector3 replacePosition, Vector3 replaceAngleEuler, float fieldOfView, float duration, bool startFollowingAfterReplaced = false)
     {
         if (!isReplacing)
         {
             isReplacing = true;
             TriggerFollow(false);
 
-            LeanTween.move(cameraObject, position, duration).setEase(easeType: LeanTweenType.easeInOutQuart);
-            LeanTween.rotateLocal(cameraObject, localEulerRotation, duration * 2).setEase(easeType: LeanTweenType.easeOutQuart);
+            LeanTween.move(cameraObject, replacePosition, duration).setEase(easeType: LeanTweenType.easeInOutQuart);
+            LeanTween.rotateLocal(cameraObject, replaceAngleEuler, duration * 2).setEase(easeType: LeanTweenType.easeOutQuart);
             LeanTween.value(mainCamera.fieldOfView, fieldOfView, duration).setOnUpdate((float val) =>
             {
                 mainCamera.fieldOfView = val;

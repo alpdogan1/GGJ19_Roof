@@ -970,7 +970,7 @@ MonoBehaviour:
   mainCamera: {fileID: 534669904}
   cameraTransform: {fileID: 534669905}
   cameraObject: {fileID: 534669902}
-  followTarget: {fileID: 0}
+  followTarget: {fileID: 2026995269}
   followOffset: {x: 0, y: 7, z: -5}
   defaultRotation: {x: 57, y: 0, z: 0}
   defaultFoV: 47
@@ -6131,7 +6131,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   fpsPlayer: {fileID: 934761746}
-  homePlayer: {fileID: 0}
+  homePlayer: {fileID: 938891231}
 --- !u!4 &702205968
 Transform:
   m_ObjectHideFlags: 0
@@ -6221,6 +6221,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2df09dcdd69544e4b23153812f70ede, type: 3}
+--- !u!114 &938891231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5807728965536321660, guid: b2df09dcdd69544e4b23153812f70ede,
+    type: 3}
+  m_PrefabInstance: {fileID: 938891230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce0f887090ea4230897771373b2601c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &984155499
 GameObject:
   m_ObjectHideFlags: 0
@@ -7657,7 +7669,7 @@ PrefabInstance:
     - target: {fileID: 1603256657604517799, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1603256657604477831, guid: f32e5be0d34084f6aa4e8d6acfa5c447,
         type: 3}
