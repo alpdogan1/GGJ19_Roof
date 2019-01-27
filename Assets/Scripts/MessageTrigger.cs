@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class MessageTrigger : MonoBehaviour
 {
+       [TextArea(15,20)]
     public string text;
     public float duration;
 

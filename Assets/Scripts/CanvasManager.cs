@@ -53,7 +53,8 @@ public class CanvasManager : Singleton<CanvasManager>
         {
             str += message[i++];
             messageBox.text = str;
-            yield return new WaitForSeconds(0.05F);
+            // yield return new WaitForFrames
+            yield return new WaitForSeconds(0.01F);
         }
     }
 }
