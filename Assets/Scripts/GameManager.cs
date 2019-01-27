@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     
     void Start()
     {
+        MasterAudio.PlaySound(SoundManager.Instance.MusicOcean);
 //        SwitchPlayer();
         HomePlayer.Initialize();
 

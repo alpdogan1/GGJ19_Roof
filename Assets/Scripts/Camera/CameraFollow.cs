@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -90,5 +91,8 @@ public class CameraFollow : Singleton<CameraFollow>
         TriggerFollow(false);
         LeanTween.move(mainCamera.gameObject, endGamePosRef.transform.position, gameEndDuration).setEase(gameEndEasing);
         LeanTween.rotate(mainCamera.gameObject, endGamePosRef.transform.rotation.eulerAngles, gameEndDuration / 3).setEase(gameEndEasing);
+//        MasterAudio.StopAllOfSound(SoundManager.Instance.Music1);
+        MasterAudio.StopAllOfSound(SoundManager.Instance.Music2);
+        MasterAudio.PlaySoundAndForget(SoundManager.Instance.Music1);
     }
 }
