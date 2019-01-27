@@ -10,7 +10,7 @@ public class HomeInputManager : Singleton<HomeInputManager>
     
     private void Update()
     {
-        if(!GameManager_Alp.Instance.Player.IsEnabled) return;
+        if(!GameManager.Instance.HomePlayer.enabled || GameBusyHandler.IsBusy) return;
         
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Vertical") > Threshold)
             OnKeyPress(Side.North);

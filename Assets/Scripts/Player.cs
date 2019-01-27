@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _roof;
 
     [ShowInInspector, ReadOnly] private bool _isMoving;
-    [ShowInInspector] private bool _isEnabled;
+//    [ShowInInspector] private bool _isEnabled;
 
     public event Action<Piece> DidTriggerPiece; 
     
@@ -15,13 +15,13 @@ public class Player : MonoBehaviour
 
     private Side RoofSide => transform.GetSideOf(_roof.transform, MainVariables.Instance.GridWidth / 4);
 
-    public bool IsEnabled
-    {
-        get { return _isEnabled; }
-        set { _isEnabled = value; }
-    }
+//    public bool IsEnabled
+//    {
+//        get { return _isEnabled; }
+//        set { _isEnabled = value; }
+//    }
 
-    private void Start()
+    public void Initialize()
     {
         HomeInputManager.Instance.KeyPress += OnKeyPress;
     }
@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
         var rotationDirectionMultiplier = (side == Side.North || side == Side.East) ? -1 : 1;
         
         // Rotate
+        var startPos = transform.position;
         var lastRotation = 0f;
         LeanTween.value(gameObject, 0, 90 * rotationDirectionMultiplier, MainVariables.Instance.PlayerRotationDuration)
             .setEase(MainVariables.Instance.PlayerRotationEasing)
@@ -60,14 +61,23 @@ public class Player : MonoBehaviour
             transform.RotateAround(farPoint, axis, rotation);
             lastRotation = f;
         })
-            .setOnStart(() => { _isMoving = true; })
+            .setOnStart(() =>
+            {
+                GameBusyHandler.SetJob(true);
+                _isMoving = true;
+            })
             .setOnComplete(() =>
             {
+                transform.position = startPos + (side.ToVector() * MainVariables.Instance.GridWidth);
+                
+                GameBusyHandler.SetJob(false);
+                
                 if (nextPiece.IsTrigger)
                 {
                     nextPiece.Trigger();
                     OnDidTriggerPiece(nextPiece);
                 }
+
                 _isMoving = false;
             });
     }
@@ -84,7 +94,7 @@ public class Player : MonoBehaviour
 
         var nextRoofSide = RoofSide.Rotate(side);
 
-        if (!nextPiece.IsRoofSideValid(nextRoofSide))
+        if (!MainVariables.Instance.Dev_GodMode && !nextPiece.IsRoofSideValid(nextRoofSide))
         {
             print($"Can't move to {side}, next tile doesn't allow roof side of {nextRoofSide}");
             return false;

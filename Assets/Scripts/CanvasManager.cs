@@ -24,7 +24,9 @@ public class CanvasManager : Singleton<CanvasManager>
             StopCoroutine(writeRoutine);
 
             LeanTween.cancel(gameObject);
-            LeanTween.alphaCanvas(messageGroup.transform, 0, 0);
+//            LeanTween.alphaCanvas(messageGroup.transform, 0, 0);
+//            LeanTween.alphaCanvas(messageGroup, 0, 0);
+            messageGroup.alpha = 0;
 
             // LeanTween.alphaText
             // var ltId = LeanTween.Move(gameObject, ).id;
@@ -37,9 +39,9 @@ public class CanvasManager : Singleton<CanvasManager>
     {
         float fadeDuration = 0.3f;
         writeRoutine = StartCoroutine(WriteAnimation(messageText));
-        LeanTween.alphaCanvas(messageGroup.transform, 1, fadeDuration).setEase(LeanTweenType.easeOutCirc);
+        LeanTween.alphaCanvas(messageGroup, 1, fadeDuration).setEase(LeanTweenType.easeOutCirc);
         yield return new WaitForSeconds(duration - (fadeDuration * 2));
-        LeanTween.alphaCanvas(messageGroup.transform, 0, fadeDuration).setEase(LeanTweenType.easeInCirc);
+        LeanTween.alphaCanvas(messageGroup, 0, fadeDuration).setEase(LeanTweenType.easeInCirc);
         yield return new WaitForSeconds(fadeDuration);
         messageRoutine = null;
     }

@@ -10,12 +10,13 @@ public class Piece : MonoBehaviour
     [SerializeField] private bool _isTrigger;
     [SerializeField] private UnityEvent _didTrigger;
     [SerializeField] private Transform _triggerFpsPosition;
+    [SerializeField] private Transform _nextHomeTransformReference;
 
     public bool IsTrigger => _isTrigger;
 
-//    public UnityEvent DidTrigger => _didTrigger;
-
     public Transform TriggerFpsPosition => _triggerFpsPosition;
+
+    public Transform NextHomeTransformReference => _nextHomeTransformReference;
 
     public bool IsRoofSideValid(Side side)
     {

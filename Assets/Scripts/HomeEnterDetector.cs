@@ -4,21 +4,26 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class HomeEnterDetector : MonoBehaviour
 {
-    private Bounds _bounds;
+    private BoxCollider _boxCollider;
+
+    public BoxCollider BoxCollider
+    {
+        get
+        {
+            if (_boxCollider == null) _boxCollider = GetComponent<BoxCollider>();
+            return _boxCollider;
+        }
+    }
 
     public event Action DidEnterHome;
 
-    private void Start()
-    {
-        _bounds = GetComponent<Collider>().bounds;
-    }
-
     private void Update()
     {
-
-
-        if (_bounds.Contains(GameManager_Alp.Instance.Player.transform.position))
+        if (!GameBusyHandler.IsBusy &&
+            GameManager.Instance.FpsPlayer.gameObject.activeInHierarchy &&
+            BoxCollider.bounds.Contains(GameManager.Instance.FpsPlayer.transform.position))
         {
+            print("HomeEnterDetector is triggered!");
             OnDidEnterHome();
         }
     }
