@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DarkTonic.MasterAudio;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class CameraFollow : Singleton<CameraFollow>
 {
@@ -33,6 +34,13 @@ public class CameraFollow : Singleton<CameraFollow>
     [SerializeField] private float gameEndDuration;
     [SerializeField] private LeanTweenType gameEndEasing;
     [SerializeField] private GameObject endGamePosRef;
+    [SerializeField] private CanvasGroup endGameUI;
+    [SerializeField] private FirstPersonController fpsController;
+
+    private void Start()
+    {
+        endGameUI.alpha = 0;
+    }
 
     void LateUpdate()
     {
@@ -94,5 +102,9 @@ public class CameraFollow : Singleton<CameraFollow>
 //        MasterAudio.StopAllOfSound(SoundManager.Instance.Music1);
         MasterAudio.StopAllOfSound(SoundManager.Instance.Music2);
         MasterAudio.PlaySoundAndForget(SoundManager.Instance.Music1);
+
+        LeanTween.alphaCanvas(endGameUI, 1, 5).setDelay(gameEndDuration * .8f).setOnStart(() =>
+        {
+            fpsController.MouseLook.SetCursorLock(false);});
     }
 }

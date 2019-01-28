@@ -23,7 +23,9 @@ public abstract class Singleton<T> : SerializedMonoBehaviour where T : Serialize
     //  INITIALIZATION
     //--------------------------------------
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
+        s_isApplicationIsQuitting = false;
 //        DontDestroyOnLoad(gameObject);
         if(gameObject.transform.parent == null) {
 //            gameObject.transform.SetParent(SingletonParent.Transform);
@@ -34,7 +36,7 @@ public abstract class Singleton<T> : SerializedMonoBehaviour where T : Serialize
         get {
             if (s_isApplicationIsQuitting) {
                 //Debug.Log(typeof(T) + " [Mog.Singleton] is already destroyed. Returning null. Please check HasInstance first before accessing instance in destructor.");
-                return null;
+//                return null;
             }
             Instantiate();
             return s_instance;
@@ -109,24 +111,26 @@ public abstract class Singleton<T> : SerializedMonoBehaviour where T : Serialize
         s_isApplicationIsQuitting = true;
         //Debug.Log(typeof(T) + " [Mog.Singleton] instance destroyed with the OnApplicationQuit event");
     }
+    
+    
 
 }
 
 
 
-static class SingletonParent
-{
-    private static Transform s_transform = null;
-
-
-    public static Transform Transform {
-        get {
-            if (s_transform == null) {
-                var go = new GameObject("Singletons");
-                Object.DontDestroyOnLoad(go);
-                s_transform = go.transform;
-            }
-            return s_transform;
-        }
-    }
-}
+//static class SingletonParent
+//{
+//    private static Transform s_transform = null;
+//
+//
+//    public static Transform Transform {
+//        get {
+//            if (s_transform == null) {
+//                var go = new GameObject("Singletons");
+//                Object.DontDestroyOnLoad(go);
+//                s_transform = go.transform;
+//            }
+//            return s_transform;
+//        }
+//    }
+//}

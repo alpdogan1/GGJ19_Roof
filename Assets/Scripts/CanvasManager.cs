@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class CanvasManager : Singleton<CanvasManager>
 {
@@ -57,9 +59,10 @@ public class CanvasManager : Singleton<CanvasManager>
             yield return new WaitForSeconds(0.01F);
         }
     }
+    [Button]
     public void RestartClicked()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("intro");
     }
     public void ExitClicked()
     {
