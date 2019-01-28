@@ -12,12 +12,18 @@ public class Piece : MonoBehaviour
     [SerializeField] private Transform _triggerFpsPosition;
     [SerializeField] private Transform _nextHomeTransformReference;
     [SerializeField] public bool IsFinalTile;
+    [SerializeField] private Side _triggerSide = Side.Bottom;
 
     public bool IsTrigger => _isTrigger;
 
     public Transform TriggerFpsPosition => _triggerFpsPosition;
 
     public Transform NextHomeTransformReference => _nextHomeTransformReference;
+
+    public Side TriggerSide
+    {
+        get { return _triggerSide; }
+    }
 
     public bool IsRoofSideValid(Side side)
     {

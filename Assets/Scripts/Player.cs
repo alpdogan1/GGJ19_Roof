@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
                 
                 GameBusyHandler.SetJob(false);
                 
-                if (nextPiece.IsTrigger)
+                if (nextPiece.IsTrigger && RoofSide == nextPiece.TriggerSide)
                 {
                     nextPiece.Trigger();
                     OnDidTriggerPiece(nextPiece);
