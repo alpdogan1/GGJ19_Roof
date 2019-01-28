@@ -24,8 +24,8 @@ public class CanvasManager : Singleton<CanvasManager>
             StopCoroutine(writeRoutine);
 
             LeanTween.cancel(gameObject);
-//            LeanTween.alphaCanvas(messageGroup.transform, 0, 0);
-//            LeanTween.alphaCanvas(messageGroup, 0, 0);
+            //            LeanTween.alphaCanvas(messageGroup.transform, 0, 0);
+            //            LeanTween.alphaCanvas(messageGroup, 0, 0);
             messageGroup.alpha = 0;
 
             // LeanTween.alphaText
@@ -56,5 +56,13 @@ public class CanvasManager : Singleton<CanvasManager>
             // yield return new WaitForFrames
             yield return new WaitForSeconds(0.01F);
         }
+    }
+    public void RestartClicked()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+    public void ExitClicked()
+    {
+        Application.Quit();
     }
 }
